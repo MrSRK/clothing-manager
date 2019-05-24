@@ -13,10 +13,18 @@ const multer=require('multer')
 const path=require('path')
 const pug=require('pug')
 //init
-const upload=multer({dest:path.join(__dirname,'upload')})
+const upload=multer({dest:path.join(__dirname,'uploads')})
 dotenv.config({path:'.env'})
 //Controllers
-
+const homeController=require('./controllers/home')
+const userController=require('./controllers/users')
+const customerController=require('./controllers/customers')
+const orderController=require('./controllers/orders')
+const productController=require('./controllers/products')
+const fabricController=require('./controllers/fabrics')
+const additionController=require('./controllers/additions')
+const styleController=require('./controllers/styles')
+const apiController=require('./controllers/api')
 //Express
 const app=express()
 /**
@@ -55,7 +63,7 @@ app.use(session({
 }))
 app.use((req,res,next)=>
 {
-  if(req.path==='/api/upload')
+  if(req.path==='/api/uploads')
     next()
   else
     lusca.csrf()(req, res, next)
